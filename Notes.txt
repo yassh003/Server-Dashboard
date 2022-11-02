@@ -1,0 +1,20 @@
+Client side + AJAX --sends data to--> Python (API) + Database (Electronic storage for data)
+
+DBMS -> Data Base Management Systems -> Tools for database storage and operations
+
+Majorly used DBMS:
+    1] RDBMS -> Relational DBMS:
+        Examples: 1] MySQL -> facebook, instagram uses this
+                  2] PostgreSQL
+                  3] Oracle DB
+                  4] MS SQL Server
+
+    2] Non Relational DBMS -> Chats, Video call apps use this. 
+        Exmaples: MongoDB, AWS DBMS
+
+    3] Object Oriented DBMS:
+    4] Network DBMS
+
+AJAX --> Asynchornous Javascript And XML
+
+SQL -> Structured Query Language -> Facilitates communication between databases and interfaces

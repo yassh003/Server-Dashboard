@@ -1,0 +1,134 @@
+<html>
+    <head>
+        <title>Visitor Login Page</title>
+
+        <!--SmartPhone View-->
+        <meta name="viewport" content="width=device-width,  initial scale=1.0">
+
+        <!--Bootstrap CDN-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    </head>
+    <body>
+        <!--Container Start-->
+        <div class="container">
+            <br>
+            <h2 style="text-align: center;">Wallmart Visitor Log</h4>
+            <br>
+
+            <!--Grid Start-->
+            <div class="row">
+                <div class="col-lg-6 col-sm-12">
+                    <img src="https://img.freepik.com/free-vector/setup-analytics-concept-illustration_114360-1503.jpg?w=740&t=st=1665998338~exp=1665998938~hmac=b95b809f8c9a25d294412f187a7261beb5ddb657610e3a15a0bd0952e4203c77" alt="Image is not found" style="width:100%">
+                </div>
+                <div class="col-lg-6 col-sm-12">
+                    <h5 style="margin-top: 70px">Log the visitor here</h5>
+                    <br>
+                    <p>
+                        <label>Gender:</label>
+                        <br>
+                        <select class="form-control" id = "gender">
+                            <option value="0" selected  disabled>--Select--</option>
+                            <option value="1">Male</option>
+                            <option value="2">Female</option>
+                        </select>
+                        <b id="errMsgGender" style="color: red"></b>
+                    </p>
+                    <br>
+                    <p>
+                        <label>Age Group:</label>
+                        <br>
+                        <select class="form-control" id = "age_grp">
+                            <option value="0"disabled selected>--Select--</option>
+                            <option value="1">Kids (5 - 12)</option>
+                            <option value="2">Teenagers (13 - 19)</option>
+                            <option value="3">Youngsters (20 - 29)</option>
+                            <option value="4">Adults (30 - 59)</option>
+                            <option value="5">Senior Citizens (60 - 100)</option>
+                        </select>
+                        <b id="errMsgAge_grp" style="color: red"></b>
+                    </p>
+                    <br>
+                    <p>
+                        <label>Comments:</label>
+                        <textarea class="form-control" id="comments"></textarea>
+                        <b id="errMsgComments" style="color: red"></b>
+                    </p>
+                    <button class="btn btn-primary" style="width:100%; margin-top:20px" onclick="validateForm()">Submit</button>
+                    <b id="successMsg" style="color: green;"></b>
+                </div>
+            </div>
+            <!--Grid End-->
+        </div>
+        <!--Container End-->
+        <script>
+            function validateForm()
+            {
+                //  Fetch the value from gender
+                var gender = document.getElementById("gender").value;
+                // Check if gender is selected
+                if(gender == 0)
+                {
+                    document.getElementById("errMsgGender").innerHTML = "Please select the gender";                    
+                    // return False;
+                }
+                else
+                {
+                    document.getElementById("errMsgGender").innerHTML = '';
+                }
+
+
+                //  Fetch the value from age group
+                var age_grp = document.getElementById("age_grp").value;
+                // Check if gender is selected
+                if(age_grp == 0)
+                {
+                    document.getElementById("errMsgAge_grp").innerHTML = "Please select the Age Group";                    
+                    // return False;
+                }
+                else
+                {
+                    document.getElementById("errMsgAge_grp").innerHTML = '';
+                }
+
+
+                // Fetch the value from text-area - "commments"
+                var comments = document.getElementById("comments").value;
+
+                // If comments are written then validate
+                if(comments)
+                {
+                    var regxComments = /^[A-za-z0-9 ]+$/
+                    var validComments = comments.match(regxComments)
+
+                    if(!validComments)
+                    {
+                        document.getElementById('errMsgComments').innerHTML = 'Only Alphanumeric Characters Are Allowed'
+                    }
+                    else
+                    {
+                        document.getElementById('errMsgComments').innerHTML = ''
+                    }
+                }
+                else
+                {
+                    document.getElementById('errMsgComments').innerHTML = ''
+                }
+
+                // AJAX POST
+                var xhttpSend = new XMLHttpRequest()
+                xhttpSend.onreadystatechange = function()
+                {
+                    if(this.readyState == 4 && this.status == 200)
+                    {
+                        document.getElementById('successMsg').innerHTML = this.responseText;
+                    }
+                };
+                xhttpSend.open('POST', 'http://localhost:5000/add_visitors', true)
+                xhttpSend.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
+                xhttpSend.send("gender="+gender+"&age-group="+age_grp+"&comments="+comments);
+                // AJAX POST
+
+            }
+        </script>
+    </body>
+</html>

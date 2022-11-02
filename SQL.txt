@@ -1,0 +1,29 @@
+INSERT INTO students(students_name, usn, dob) VALUES ('[students_name]','[usn]','[dob]') -> Creates a row/record in the table
+
+Read commands in SQL:
+
+    SELECT * FROM students -> Displays entire table
+
+    SELECT * FROM students WHERE usn = '4VV21CI035';  -> Filters record by taking usn in consideration. It's not case sensitive.
+
+    SELECT * FROM students WHERE dob = '2002-01-01'; -> Filters record by taking dob in consideration.
+
+    SELECT * FROM students WHERE students_name = 'abhishek '; -> Space is considered as a character
+
+    SELECT students_name, usn FROM students WHERE usn = '4VV21CI005';
+
+    SELECT * FROM students WHERE dob BETWEEN '1990.01.01' AND '2000.01.01'; -> Filters Specified range of dates.
+
+    Sorting of the records:
+
+        SELECT * FROM students ORDER BY students_name; -> Alphabetical ordering of data
+
+        SELECT * FROM students ORDER BY students_name DESC; -> Reverse alphabetical ordering of data
+
+Updating records in the database:
+
+    UPDATE students SET dob = '2003-01-01' WHERE id = 1;
+
+Deleting records in the database:
+
+    DELETE FROM students WHERE id = 2;
